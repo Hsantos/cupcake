@@ -12,7 +12,7 @@ package com.cupcake.rockpaperscissors.main.canvas.view
     
     import starling.display.DisplayObject;
     
-    [SWF(width="800", height="600", frameRate="60", backgroundColor="#281e29")]
+    [SWF(width="800", height="600", frameRate="60", backgroundColor="#e1e1e1")]
     public class CanvasMainSwf extends MainSwf
     {
         static internal var ME:CanvasMainSwf;

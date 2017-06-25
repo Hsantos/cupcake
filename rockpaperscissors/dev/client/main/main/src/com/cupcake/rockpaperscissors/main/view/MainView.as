@@ -57,7 +57,7 @@ package com.cupcake.rockpaperscissors.main.view
         
         public function addGeneric(generic:IGeneric):void
         {
-            //TODO to review
+            //TODO to review (queue case)
             genericContainer.removeChildren(0, -1, true);
             
             genericContainer.addChild(generic as DisplayObject);

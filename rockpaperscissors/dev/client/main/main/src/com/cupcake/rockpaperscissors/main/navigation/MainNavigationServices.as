@@ -18,6 +18,8 @@ package com.cupcake.rockpaperscissors.main.navigation
     import com.cupcake.rockpaperscissors.services.navigation.Screens;
     
     import flash.utils.describeType;
+    import flash.utils.setInterval;
+    import flash.utils.setTimeout;
     
     public class MainNavigationServices implements INavigationServices
     {
@@ -29,10 +31,9 @@ package com.cupcake.rockpaperscissors.main.navigation
             
             Screens.HUD.setController(HudController);
             //TODO more screens
-    
-            //TODO to fix
+            
+            // init
             state = Screens.HUD.flag;
-            state |= Screens.HUD.flag;
             
         }
         
@@ -54,9 +55,9 @@ package com.cupcake.rockpaperscissors.main.navigation
                 
                 if (screen is IMainContentScreen)
                 {
+                    screen.dispose();
                     if (BitFlagUtils.isSet(value, screen.flag))
                     {
-                        screen.dispose();
                         screen.setController(screen.controllerClass, true);
                         MainController.ME.addMainContent(screen.controller.getView() as IMainContent);
                     }
@@ -64,9 +65,9 @@ package com.cupcake.rockpaperscissors.main.navigation
                 
                 if (screen is IHudScreen)
                 {
+                    screen.dispose();
                     if (BitFlagUtils.isSet(value, screen.flag))
                     {
-                        screen.dispose();
                         screen.setController(screen.controllerClass, true);
                         MainController.ME.addHud(screen.controller.getView() as IHud);
                     }
@@ -74,9 +75,9 @@ package com.cupcake.rockpaperscissors.main.navigation
                 
                 if (screen is ILoaderScreen)
                 {
+                    screen.dispose();
                     if (BitFlagUtils.isSet(value, screen.flag))
                     {
-                        screen.dispose();
                         screen.setController(screen.controllerClass, true);
                         MainController.ME.addLoader(screen.controller.getView() as ILoader);
                     }
@@ -84,9 +85,9 @@ package com.cupcake.rockpaperscissors.main.navigation
                 
                 if (screen is IGenericScreen)
                 {
+                    screen.dispose();
                     if (BitFlagUtils.isSet(value, screen.flag))
                     {
-                        screen.dispose();
                         screen.setController(screen.controllerClass, true);
                         MainController.ME.addGeneric(screen.controller.getView() as IGeneric);
                     }
