@@ -3,7 +3,7 @@ package com.cupcake.rockpaperscissors.hud.view
     import com.core.domain.services.view.IHud;
     import com.core.domain.services.view.IView;
     import com.core.utils.Statics;
-    import com.cupcake.rockpaperscissors.hud.assets.Fonts;
+    import com.cupcake.rockpaperscissors.assets.Fonts;
     
     import starling.display.Quad;
     import starling.display.Sprite;
