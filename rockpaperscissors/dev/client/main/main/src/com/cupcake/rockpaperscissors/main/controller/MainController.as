@@ -1,7 +1,7 @@
 package com.cupcake.rockpaperscissors.main.controller
 {
     import com.core.domain.services.controller.ScreenController;
-    import com.core.domain.services.view.IGame;
+    import com.core.domain.services.view.IMainContent;
     import com.core.domain.services.view.IGeneric;
     import com.core.domain.services.view.IHud;
     import com.core.domain.services.view.ILoader;
@@ -42,9 +42,9 @@ package com.cupcake.rockpaperscissors.main.controller
             return view = super.getView() as MainView;
         }
         
-        public function addGame(game:IGame):void
+        public function addMainContent(mainContent:IMainContent):void
         {
-            view.addGame(game);
+            view.addMainContent(mainContent);
         }
         
         public function addHud(hud:IHud):void

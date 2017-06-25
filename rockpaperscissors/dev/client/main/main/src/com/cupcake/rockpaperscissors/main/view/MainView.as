@@ -1,6 +1,6 @@
 package com.cupcake.rockpaperscissors.main.view
 {
-    import com.core.domain.services.view.IGame;
+    import com.core.domain.services.view.IMainContent;
     import com.core.domain.services.view.IGeneric;
     import com.core.domain.services.view.IHud;
     import com.core.domain.services.view.ILoader;
@@ -37,10 +37,10 @@ package com.cupcake.rockpaperscissors.main.view
             return this;
         }
         
-        public function addGame(game:IGame):void
+        public function addMainContent(mainContent:IMainContent):void
         {
             gameContainer.removeChildren(0, -1, true);
-            gameContainer.addChild(game as DisplayObject);
+            gameContainer.addChild(mainContent as DisplayObject);
         }
         
         public function addHud(hud:IHud):void

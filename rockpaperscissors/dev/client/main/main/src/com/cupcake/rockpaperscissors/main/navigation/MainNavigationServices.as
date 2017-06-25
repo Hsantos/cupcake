@@ -3,12 +3,18 @@ package com.cupcake.rockpaperscissors.main.navigation
     
     import com.core.domain.services.navigation.INavigationServices;
     import com.core.domain.services.navigation.Screen;
+    import com.core.domain.services.view.IGeneric;
     import com.core.domain.services.view.IHud;
+    import com.core.domain.services.view.ILoader;
+    import com.core.domain.services.view.IMainContent;
     import com.core.utils.BitFlagUtils;
     import com.core.utils.Utils;
     import com.cupcake.rockpaperscissors.hud.controller.HudController;
     import com.cupcake.rockpaperscissors.main.controller.MainController;
-    import com.cupcake.rockpaperscissors.services.navigation.HudScreen;
+    import com.cupcake.rockpaperscissors.services.navigation.IGenericScreen;
+    import com.cupcake.rockpaperscissors.services.navigation.IHudScreen;
+    import com.cupcake.rockpaperscissors.services.navigation.ILoaderScreen;
+    import com.cupcake.rockpaperscissors.services.navigation.IMainContentScreen;
     import com.cupcake.rockpaperscissors.services.navigation.Screens;
     
     import flash.utils.describeType;
@@ -26,6 +32,7 @@ package com.cupcake.rockpaperscissors.main.navigation
             
             // init
             state = Screens.HUD.flag;
+            state |= Screens.HUD.flag;
             
         }
         
@@ -44,62 +51,49 @@ package com.cupcake.rockpaperscissors.main.navigation
             {
                 
                 var screen:Screen = Screens[node.@name];
-
-//                if (screen is MainContentScreen)
-//                {
-//                    screen.dispose();
-//                    if (BitFlagUtils.isSet(value, screen.flag))
-//                    {
-//                        screen.setController(screen.controllerClass, true);
-//                        MainController.ME.addHud(screen.controller.getView() as IHud);
-//                    }
-//                }
                 
-                if (screen is HudScreen)
+                if (screen is IMainContentScreen)
                 {
-                    screen.dispose();
                     if (BitFlagUtils.isSet(value, screen.flag))
                     {
+                        screen.dispose();
+                        screen.setController(screen.controllerClass, true);
+                        MainController.ME.addMainContent(screen.controller.getView() as IMainContent);
+                    }
+                }
+                
+                if (screen is IHudScreen)
+                {
+                    if (BitFlagUtils.isSet(value, screen.flag))
+                    {
+                        screen.dispose();
                         screen.setController(screen.controllerClass, true);
                         MainController.ME.addHud(screen.controller.getView() as IHud);
                     }
                 }
                 
+                if (screen is ILoaderScreen)
+                {
+                    if (BitFlagUtils.isSet(value, screen.flag))
+                    {
+                        screen.dispose();
+                        screen.setController(screen.controllerClass, true);
+                        MainController.ME.addLoader(screen.controller.getView() as ILoader);
+                    }
+                }
+                
+                if (screen is IGenericScreen)
+                {
+                    if (BitFlagUtils.isSet(value, screen.flag))
+                    {
+                        screen.dispose();
+                        screen.setController(screen.controllerClass, true);
+                        MainController.ME.addGeneric(screen.controller.getView() as IGeneric);
+                    }
+                }
+                
             }
-
-//            for (var screen:Screen in Screens)
-//            {
-//                Utils.print(screen);
-//            }
-
-//            reset();
-
-//            for each (var screen:Screen in Screens.SCREEN_LIST)
-//            {
-//                if (BitFlagUtils.isSet(value, screen.state))
-//                {
-//                    if (screen.id == "HUD")
-//                    {
-//                        screen.dispose();
-//                        screen.setController(HudController, true);
-//                        MainController.ME.addHud(HudController.ME.getView() as IHud);
-//                    }
-//
-//                }
-//            }
-
-//            if (BitFlagUtils.isSet(value, MainNavigationStates.HUD))
-//            {
-//                Screens.HUD.setController(HudController, true);
-//                MainController.ME.addHud(HudController.ME.getView() as IHud);
-//            }
-//
-//            if (BitFlagUtils.isSet(value, MainNavigationStates.GAME))
-//            {
-////                Screens.GAME.dispose();
-////                Screens.GAME.setController(GameController, true);
-////                MainController.ME.addGame(GameController.ME.getView() as IGame);
-//            }
+            
         }
 
 //        public function resetAll():void
