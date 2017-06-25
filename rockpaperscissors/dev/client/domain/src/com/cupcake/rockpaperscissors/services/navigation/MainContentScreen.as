@@ -4,9 +4,9 @@ package com.cupcake.rockpaperscissors.services.navigation
     
     public class MainContentScreen extends Screen implements IMainContentScreen
     {
-        function MainContentScreen(id:String, state:uint = 0)
+        function MainContentScreen(id:String, flag:uint = 0)
         {
-            super(id, state);
+            super(id, flag);
         }
     
         public function reload():void

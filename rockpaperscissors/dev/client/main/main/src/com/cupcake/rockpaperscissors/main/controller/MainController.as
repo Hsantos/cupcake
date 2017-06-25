@@ -46,20 +46,40 @@ package com.cupcake.rockpaperscissors.main.controller
         {
             view.addMainContent(mainContent);
         }
+    
+        public function containsMainContent(mainContent:IMainContent):Boolean
+        {
+            return view.containsMainContent(mainContent);
+        }
         
         public function addHud(hud:IHud):void
         {
             view.addHud(hud);
+        }
+    
+        public function containsHud(hud:IHud):Boolean
+        {
+            return view.containsHud(hud);
         }
         
         public function addGeneric(generic:IGeneric):void
         {
             view.addGeneric(generic);
         }
+    
+        public function containsGeneric(generic:IGeneric):Boolean
+        {
+            return view.containsGeneric(generic);
+        }
         
         public function addLoader(loader:ILoader):void
         {
             view.addLoader(loader);
+        }
+    
+        public function containsLoader(loader:ILoader):void
+        {
+            view.containsLoader(loader);
         }
         
     }

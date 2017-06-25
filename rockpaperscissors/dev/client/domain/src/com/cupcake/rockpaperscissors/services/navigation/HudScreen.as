@@ -4,9 +4,9 @@ package com.cupcake.rockpaperscissors.services.navigation
     
     public class HudScreen extends Screen implements IHudScreen
     {
-        function HudScreen(id:String, state:uint = 0)
+        function HudScreen(id:String, flag:uint = 0)
         {
-            super(id, state);
+            super(id, flag);
         }
     }
 }

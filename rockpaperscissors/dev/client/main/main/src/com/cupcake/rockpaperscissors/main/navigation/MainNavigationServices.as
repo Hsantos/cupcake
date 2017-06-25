@@ -10,6 +10,7 @@ package com.cupcake.rockpaperscissors.main.navigation
     import com.core.utils.BitFlagUtils;
     import com.core.utils.Utils;
     import com.cupcake.rockpaperscissors.hud.controller.HudController;
+    import com.cupcake.rockpaperscissors.lobby.controller.LobbyController;
     import com.cupcake.rockpaperscissors.main.controller.MainController;
     import com.cupcake.rockpaperscissors.services.navigation.IGenericScreen;
     import com.cupcake.rockpaperscissors.services.navigation.IHudScreen;
@@ -18,7 +19,6 @@ package com.cupcake.rockpaperscissors.main.navigation
     import com.cupcake.rockpaperscissors.services.navigation.Screens;
     
     import flash.utils.describeType;
-    import flash.utils.setInterval;
     import flash.utils.setTimeout;
     
     public class MainNavigationServices implements INavigationServices
@@ -30,10 +30,11 @@ package com.cupcake.rockpaperscissors.main.navigation
             Utils.print("MainNavigationServices.initiate()");
             
             Screens.HUD.setController(HudController);
+            Screens.LOBBY.setController(LobbyController);
             //TODO more screens
             
             // init
-            state = Screens.HUD.flag;
+            state = Screens.HUD.flag | Screens.LOBBY.flag;
             
         }
         
@@ -50,51 +51,26 @@ package com.cupcake.rockpaperscissors.main.navigation
             
             for each(var node:XML in describeType(Screens)..constant)
             {
-                
                 var screen:Screen = Screens[node.@name];
                 
-                if (screen is IMainContentScreen)
-                {
-                    screen.dispose();
-                    if (BitFlagUtils.isSet(value, screen.flag))
-                    {
-                        screen.setController(screen.controllerClass, true);
-                        MainController.ME.addMainContent(screen.controller.getView() as IMainContent);
-                    }
-                }
-                
-                if (screen is IHudScreen)
-                {
-                    screen.dispose();
-                    if (BitFlagUtils.isSet(value, screen.flag))
-                    {
-                        screen.setController(screen.controllerClass, true);
-                        MainController.ME.addHud(screen.controller.getView() as IHud);
-                    }
-                }
-                
-                if (screen is ILoaderScreen)
-                {
-                    screen.dispose();
-                    if (BitFlagUtils.isSet(value, screen.flag))
-                    {
-                        screen.setController(screen.controllerClass, true);
-                        MainController.ME.addLoader(screen.controller.getView() as ILoader);
-                    }
-                }
-                
-                if (screen is IGenericScreen)
-                {
-                    screen.dispose();
-                    if (BitFlagUtils.isSet(value, screen.flag))
-                    {
-                        screen.setController(screen.controllerClass, true);
-                        MainController.ME.addGeneric(screen.controller.getView() as IGeneric);
-                    }
-                }
-                
+                if (screen is IMainContentScreen) processState(screen, state, MainController.ME.containsMainContent, MainController.ME.addMainContent, IMainContent);
+                if (screen is IHudScreen) processState(screen, state, MainController.ME.containsHud, MainController.ME.addHud, IHud);
+                if (screen is ILoaderScreen) processState(screen, state, MainController.ME.containsLoader, MainController.ME.addLoader, ILoader);
+                if (screen is IGenericScreen) processState(screen, state, MainController.ME.containsGeneric, MainController.ME.addGeneric, IGeneric);
             }
             
+        }
+        
+        private function processState(screen:Screen, currentState:uint, containsFunc:Function, addFunc:Function, itype:Class):void
+        {
+            if (BitFlagUtils.isSet(currentState, screen.flag))
+            {
+                if (screen.controller && containsFunc(screen.controller.getView() as itype)) return;
+                screen.dispose();
+                screen.setController(screen.controllerClass, true);
+                addFunc(screen.controller.getView() as itype);
+            }
+            else screen.dispose();
         }
 
 //        public function resetAll():void

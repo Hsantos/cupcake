@@ -4,9 +4,9 @@ package com.cupcake.rockpaperscissors.services.navigation
     
     public class GenericScreen extends Screen implements IGenericScreen
     {
-        function GenericScreen(id:String, state:uint = 0)
+        function GenericScreen(id:String, flag:uint = 0)
         {
-            super(id, state);
+            super(id, flag);
         }
     }
 }

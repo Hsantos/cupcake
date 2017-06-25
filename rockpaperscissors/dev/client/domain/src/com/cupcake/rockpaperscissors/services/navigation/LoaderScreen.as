@@ -4,9 +4,9 @@ package com.cupcake.rockpaperscissors.services.navigation
     
     public class LoaderScreen extends Screen implements ILoaderScreen
     {
-        function LoaderScreen(id:String, state:uint = 0)
+        function LoaderScreen(id:String, flag:uint = 0)
         {
-            super(id, state);
+            super(id, flag);
         }
     }
 }
