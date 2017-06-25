@@ -29,8 +29,8 @@ package com.cupcake.rockpaperscissors.main.navigation
             
             Screens.HUD.setController(HudController);
             //TODO more screens
-            
-            // init
+    
+            //TODO to fix
             state = Screens.HUD.flag;
             state |= Screens.HUD.flag;
             
