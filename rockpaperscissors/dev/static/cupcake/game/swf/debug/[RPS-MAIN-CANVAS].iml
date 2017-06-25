@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="Flex" version="4">
+  <component name="FlexBuildConfigurationManager" active="[lib]">
+    <configurations>
+      <configuration name="[lib]" pure-as="true" output-type="Library" output-file=".swc" skip-build="true">
+        <dependencies target-player="26.0">
+          <entries>
+            <entry module-name="[RPS-MAIN]" build-configuration-name="[lib]">
+              <dependency linkage="Include" />
+            </entry>
+          </entries>
+          <sdk name="26.0.0.118" />
+        </dependencies>
+        <compiler-options />
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+      <configuration name="[DEBUG-CanvasMainSwf]" pure-as="true" main-class="com.cupcake.rockpaperscissors.main.canvas.view.CanvasMainSwf" output-file="CanvasMainSwf.swf" output-folder="$MODULE_DIR$/../../../../static/cupcake/game/swf/debug">
+        <dependencies target-player="26.0">
+          <entries>
+            <entry library-name="rps-CanvasMainSwf-lib" library-level="project">
+              <dependency linkage="Include" />
+            </entry>
+          </entries>
+          <sdk name="26.0.0.118" />
+        </dependencies>
+        <compiler-options>
+          <map>
+            <entry key="compiler.debug.swf" value="true" />
+          </map>
+          <option name="additionalOptions" value="-define+=CONFIG::DEBUG,true" />
+        </compiler-options>
+        <packaging-air-desktop />
+        <packaging-android />
+        <packaging-ios />
+      </configuration>
+    </configurations>
+    <compiler-options />
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$" isTestSource="false" />
+    </content>
+    <orderEntry type="jdk" jdkName="26.0.0.118" jdkType="Flex SDK Type (new)" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="[RPS-MAIN]" exported="" />
+    <orderEntry type="library" exported="" name="rps-CanvasMainSwf-lib" level="project" />
+  </component>
+</module>
