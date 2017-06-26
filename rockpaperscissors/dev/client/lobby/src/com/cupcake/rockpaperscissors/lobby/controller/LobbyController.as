@@ -9,6 +9,7 @@ package com.cupcake.rockpaperscissors.lobby.controller
     import com.cupcake.rockpaperscissors.lobby.view.LobbyView;
     import com.cupcake.rockpaperscissors.services.main.GameContext;
     import com.cupcake.rockpaperscissors.services.navigation.GameScreen;
+    import com.cupcake.rockpaperscissors.services.navigation.Screens;
     
     public class LobbyController extends ScreenController
     {
@@ -46,7 +47,8 @@ package com.cupcake.rockpaperscissors.lobby.controller
         public function gotoGame(game:GameScreen):void
         {
             Utils.print("LobbyController.gotoGame: " + game, IScreen(game).flag);
-            
+    
+            GameContext.ME.navigator.state &= ~Screens.LOBBY.flag;
             GameContext.ME.navigator.state |= IScreen(game).flag;
         }
         

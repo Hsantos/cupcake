@@ -65,27 +65,27 @@ package com.cupcake.rockpaperscissors.gameplayer.view
             super.dispose();
         }
         
-        public var baseBitmapForTextures:Bitmap;
-        public var rockBmp:BitmapData;
-        public var paperBmp:BitmapData;
-        public var scissorsBmp:BitmapData;
+        private var baseBitmapForTextures:Bitmap;
+        private var rockBmp:BitmapData;
+        private var paperBmp:BitmapData;
+        private var scissorsBmp:BitmapData;
         
-        public var rockPlayer:Sprite;
-        public var rockPlayerImage:Image;
-        public var rockCpu:Sprite;
-        public var rockCpuImage:Image;
+        private var rockPlayer:Sprite;
+        private var rockPlayerImage:Image;
+        private var rockCpu:Sprite;
+        private var rockCpuImage:Image;
         
-        public var paperPlayer:Sprite;
-        public var paperPlayerImage:Image;
-        public var paperCpu:Sprite;
-        public var paperCpuImage:Image;
+        private var paperPlayer:Sprite;
+        private var paperPlayerImage:Image;
+        private var paperCpu:Sprite;
+        private var paperCpuImage:Image;
         
-        public var scissorsPlayer:Sprite;
-        public var scissorsPlayerImage:Image;
-        public var scissorsCpu:Sprite;
-        public var scissorsCpuImage:Image;
+        private var scissorsPlayer:Sprite;
+        private var scissorsPlayerImage:Image;
+        private var scissorsCpu:Sprite;
+        private var scissorsCpuImage:Image;
         
-        public var backButton:Sprite;
+        private var backButton:Sprite;
         
         public function draw():IView
         {
@@ -170,21 +170,21 @@ package com.cupcake.rockpaperscissors.gameplayer.view
             createActions();
         }
         
-        public function createActions():void
+        private function createActions():void
         {
             this.addEventListener(TouchEvent.TOUCH, gameTouch);
             this.touchGroup = false;
             this.touchable = true;
         }
         
-        public const DRAG_TOLERANCE:int = 20 / Starling.contentScaleFactor;
-        public var origin:Point = new Point();
-        public var toleranceFlag:Boolean = false;
+        private const DRAG_TOLERANCE:int = 20 / Starling.contentScaleFactor;
+        private var origin:Point = new Point();
+        private var toleranceFlag:Boolean = false;
         
         public var selectedPlayer:Sprite;
-        public var selectedCpu:Sprite;
+        private var selectedCpu:Sprite;
         
-        public function gameTouch(e:TouchEvent):void
+        private function gameTouch(e:TouchEvent):void
         {
             rockPlayer.alpha = 1.0;
             paperPlayer.alpha = 1.0;

@@ -11,18 +11,18 @@ package com.cupcake.rockpaperscissors.services.navigation
         static public const LOBBY:MainContentScreen = new MainContentScreen("LOBBY", 1 << 0);
         //
         static public const GAME_PLAYER:GameScreen = new GameScreen("GAME_PLAYER", 1 << 1);
-        static public const GAME_CPU:GameScreen = new GameScreen("GAME_CPU", 1 << 2);
+//        static public const GAME_CPU:GameScreen = new GameScreen("GAME_CPU", 1 << 2);
         
         // huds
-        static public const HUD:HudScreen = new HudScreen("HUD", 1 << 3);
+        static public const HUD:HudScreen = new HudScreen("HUD", 1 << 2);
         
         // loaders
-        static public const LOADER:LoaderScreen = new LoaderScreen("LOADER_LOOBY", 1 << 4);
+        static public const LOADER:LoaderScreen = new LoaderScreen("LOADER_LOOBY", 1 << 3);
         
         // generics
-        static public const WELCOME:GenericScreen = new GenericScreen("WELCOME", 1 << 5);
-        static public const NOTIFICATION:GenericScreen = new GenericScreen("NOTIFICATION", 1 << 6);
-        static public const ERROR:GenericScreen = new GenericScreen("ERROR", 1 << 7);
+//        static public const WELCOME:GenericScreen = new GenericScreen("WELCOME", 1 << 5);
+        static public const NOTIFICATION:GenericScreen = new GenericScreen("NOTIFICATION", 1 << 4);
+//        static public const ERROR:GenericScreen = new GenericScreen("ERROR", 1 << 7);
         
     }
 }

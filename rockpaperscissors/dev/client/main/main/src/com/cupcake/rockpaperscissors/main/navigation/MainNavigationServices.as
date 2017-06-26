@@ -10,13 +10,16 @@ package com.cupcake.rockpaperscissors.main.navigation
     import com.core.utils.BitFlagUtils;
     import com.core.utils.Utils;
     import com.cupcake.rockpaperscissors.gameplayer.controller.GamePlayerController;
+    import com.cupcake.rockpaperscissors.gameplayer.controller.GamePlayerNotificationController;
     import com.cupcake.rockpaperscissors.hud.controller.HudController;
     import com.cupcake.rockpaperscissors.lobby.controller.LobbyController;
     import com.cupcake.rockpaperscissors.main.controller.MainController;
+    import com.cupcake.rockpaperscissors.services.navigation.GameScreen;
+    import com.cupcake.rockpaperscissors.services.navigation.GenericScreen;
+    import com.cupcake.rockpaperscissors.services.navigation.HudScreen;
     import com.cupcake.rockpaperscissors.services.navigation.IGenericScreen;
-    import com.cupcake.rockpaperscissors.services.navigation.IHudScreen;
-    import com.cupcake.rockpaperscissors.services.navigation.ILoaderScreen;
-    import com.cupcake.rockpaperscissors.services.navigation.IMainContentScreen;
+    import com.cupcake.rockpaperscissors.services.navigation.LoaderScreen;
+    import com.cupcake.rockpaperscissors.services.navigation.MainContentScreen;
     import com.cupcake.rockpaperscissors.services.navigation.Screens;
     
     import flash.utils.describeType;
@@ -32,6 +35,7 @@ package com.cupcake.rockpaperscissors.main.navigation
             Screens.HUD.setController(HudController);
             Screens.LOBBY.setController(LobbyController);
             Screens.GAME_PLAYER.setController(GamePlayerController);
+            Screens.NOTIFICATION.setController(GamePlayerNotificationController);
             //TODO more screens
             
             // init
@@ -56,10 +60,10 @@ package com.cupcake.rockpaperscissors.main.navigation
             {
                 var screen:Screen = Screens[node.@name];
                 
-                if (screen is IMainContentScreen) processState(screen, state, MainController.ME.containsMainContent, MainController.ME.addMainContent, IMainContent, 0);
-                if (screen is IHudScreen) processState(screen, state, MainController.ME.containsHud, MainController.ME.addHud, IHud, 1);
-                if (screen is ILoaderScreen) processState(screen, state, MainController.ME.containsLoader, MainController.ME.addLoader, ILoader, 2);
-                if (screen is IGenericScreen) processState(screen, state, MainController.ME.containsGeneric, MainController.ME.addGeneric, IGeneric, 3);
+                if (screen is MainContentScreen || screen is GameScreen) processState(screen, state, MainController.ME.containsMainContent, MainController.ME.addMainContent, IMainContent, 0);
+                if (screen is HudScreen) processState(screen, state, MainController.ME.containsHud, MainController.ME.addHud, IHud, 1);
+                if (screen is LoaderScreen) processState(screen, state, MainController.ME.containsLoader, MainController.ME.addLoader, ILoader, 2);
+                if (screen is GenericScreen) processState(screen, state, MainController.ME.containsGeneric, MainController.ME.addGeneric, IGeneric, 3);
             }
             
         }
@@ -68,6 +72,7 @@ package com.cupcake.rockpaperscissors.main.navigation
         
         private function processState(screen:Screen, currentState:uint, containsFunc:Function, addFunc:Function, itype:Class, stateCounterIndex:uint):void
         {
+            
             if (BitFlagUtils.isSet(currentState, screen.flag))
             {
                 

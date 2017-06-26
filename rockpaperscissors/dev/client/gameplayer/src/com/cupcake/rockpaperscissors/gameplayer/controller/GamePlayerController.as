@@ -9,6 +9,9 @@ package com.cupcake.rockpaperscissors.gameplayer.controller
     import com.cupcake.rockpaperscissors.services.main.GameContext;
     import com.cupcake.rockpaperscissors.services.navigation.Screens;
     
+    import flash.utils.clearTimeout;
+    import flash.utils.setTimeout;
+    
     public class GamePlayerController extends ScreenController
     {
         static public var ME:GamePlayerController;
@@ -21,6 +24,8 @@ package com.cupcake.rockpaperscissors.gameplayer.controller
         
         override public function dispose():void
         {
+//            clearTimeout(checkResultDelay);
+            clearTimeout(checkResultDelay);
             ME = null;
             super.dispose();
         }
@@ -53,24 +58,41 @@ package com.cupcake.rockpaperscissors.gameplayer.controller
             GamePlayerView(view).setChoseState();
         }
         
+        private var checkResultDelay:uint;
+        private const RESULT_DELAY:int = 1000;
+        
         public function checkResult():void
         {
-            var finalResult:int = GamePlayerView(view).checkResult();
-            Utils.print("DONE! - finalResult: " + finalResult);
-            switch (finalResult)
+            clearTimeout(checkResultDelay);
+            
+            checkResultDelay = setTimeout(function ():void
             {
-            case 0:
-                Utils.print("YOU LOSE!");
-                break;
-            case 1:
-                Utils.print("YOU WIN!");
-                break;
-            case 2:
-                Utils.print("DRAW!");
-                break;
-            default:
-                throw new Error("finalResult unexpected: " + finalResult);
-            }
+                var finalResult:int = GamePlayerView(view).checkResult();
+                Utils.print("DONE! - finalResult: " + finalResult);
+                
+                var descriptionToNotification:String;
+                
+                switch (finalResult)
+                {
+                case 0:
+                    descriptionToNotification = "YOU LOSE!";
+                    break;
+                case 1:
+                    descriptionToNotification = "YOU WIN!";
+                    break;
+                case 2:
+                    descriptionToNotification = "DRAW!";
+                    break;
+                default:
+                    throw new Error("finalResult unexpected: " + finalResult);
+                }
+    
+                Utils.print(descriptionToNotification);
+                
+                GameContext.ME.navigator.state |= Screens.NOTIFICATION.flag;
+                GamePlayerNotificationController.ME.updateDescription(descriptionToNotification);
+                
+            }, RESULT_DELAY);
         }
         
         public function backButtonClick():void
