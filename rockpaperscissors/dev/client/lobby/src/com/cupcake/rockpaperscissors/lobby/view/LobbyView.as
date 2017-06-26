@@ -5,6 +5,8 @@ package com.cupcake.rockpaperscissors.lobby.view
     import com.core.utils.Statics;
     import com.core.utils.Utils;
     import com.cupcake.rockpaperscissors.assets.Fonts;
+    import com.cupcake.rockpaperscissors.lobby.controller.LobbyController;
+    import com.cupcake.rockpaperscissors.services.navigation.Screens;
     
     import flash.geom.Point;
     
@@ -63,13 +65,13 @@ package com.cupcake.rockpaperscissors.lobby.view
             
             gamePlayer = gamesContainer.addChild(new Sprite()) as Sprite;
             gamePlayer.addChild(new Quad(200, 100, 0xe5e5e5));
-            gamePlayer.addChild(new TextField(200, 100, "PLAYER.vs.CPU", textFormat, textOption));
+            gamePlayer.addChild(new TextField(200, 100, "PLAYER vs CPU", textFormat, textOption));
             gamePlayer.name = "gamePlayer";
             
             gameCPU = gamesContainer.addChild(new Sprite()) as Sprite;
-            gameCPU.addChild(new Quad(200, 100, 0xe5e5e5));
+            gameCPU.addChild(new Quad(200, 100, 0xc5c5c5));
             gameCPU.x = 205;
-            gameCPU.addChild(new TextField(200, 100, "CPU.vs.CPU", textFormat, textOption));
+            gameCPU.addChild(new TextField(200, 100, "CPU vs CPU\n[blocked]", textFormat, textOption));
             gameCPU.name = "gameCPU";
             
             gameSoon = gamesContainer.addChild(new Sprite()) as Sprite;
@@ -129,15 +131,19 @@ package com.cupcake.rockpaperscissors.lobby.view
                     
                     if (t.isTouching(gamePlayer))
                     {
-                        Utils.print("goto:", gamePlayer.name);
+                        LobbyController.ME.gotoGame(Screens.GAME_PLAYER);
                     }
                     if (t.isTouching(gameCPU))
                     {
-                        Utils.print("goto:", gameCPU.name);
+//                        LobbyController.ME.gotoGame(Screens.GAME_CPU);
+                        
+                        //TODO
+                        Utils.print("TODO: LobbyController.ME.gotoGame(Screens.GAME_CPU)");
                     }
                     if (t.isTouching(gameSoon))
                     {
-                        Utils.print("goto:", gameSoon.name);
+                        //TODO
+                        Utils.print("TODO: trigger \"soon\" notification");
                     }
                     
                 }

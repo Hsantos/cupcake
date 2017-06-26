@@ -9,8 +9,9 @@ package com.cupcake.rockpaperscissors.services.navigation
         
         // main content
         static public const LOBBY:MainContentScreen = new MainContentScreen("LOBBY", 1 << 0);
-        static public const GAME_PLAYER:MainContentScreen = new MainContentScreen("GAME_PLAYER", 1 << 1);
-        static public const GAME_CPU:MainContentScreen = new MainContentScreen("GAME_CPU", 1 << 2);
+        //
+        static public const GAME_PLAYER:GameScreen = new GameScreen("GAME_PLAYER", 1 << 1);
+        static public const GAME_CPU:GameScreen = new GameScreen("GAME_CPU", 1 << 2);
         
         // huds
         static public const HUD:HudScreen = new HudScreen("HUD", 1 << 3);

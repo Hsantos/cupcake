@@ -9,6 +9,7 @@ package com.cupcake.rockpaperscissors.main.navigation
     import com.core.domain.services.view.IMainContent;
     import com.core.utils.BitFlagUtils;
     import com.core.utils.Utils;
+    import com.cupcake.rockpaperscissors.gameplayer.controller.GamePlayerController;
     import com.cupcake.rockpaperscissors.hud.controller.HudController;
     import com.cupcake.rockpaperscissors.lobby.controller.LobbyController;
     import com.cupcake.rockpaperscissors.main.controller.MainController;
@@ -19,7 +20,6 @@ package com.cupcake.rockpaperscissors.main.navigation
     import com.cupcake.rockpaperscissors.services.navigation.Screens;
     
     import flash.utils.describeType;
-    import flash.utils.setTimeout;
     
     public class MainNavigationServices implements INavigationServices
     {
@@ -31,6 +31,7 @@ package com.cupcake.rockpaperscissors.main.navigation
             
             Screens.HUD.setController(HudController);
             Screens.LOBBY.setController(LobbyController);
+            Screens.GAME_PLAYER.setController(GamePlayerController);
             //TODO more screens
             
             // init
@@ -49,22 +50,33 @@ package com.cupcake.rockpaperscissors.main.navigation
         {
             this.statee = value;
             
+            stateCounter = new <uint>[0, 0, 0, 0];
+            
             for each(var node:XML in describeType(Screens)..constant)
             {
                 var screen:Screen = Screens[node.@name];
                 
-                if (screen is IMainContentScreen) processState(screen, state, MainController.ME.containsMainContent, MainController.ME.addMainContent, IMainContent);
-                if (screen is IHudScreen) processState(screen, state, MainController.ME.containsHud, MainController.ME.addHud, IHud);
-                if (screen is ILoaderScreen) processState(screen, state, MainController.ME.containsLoader, MainController.ME.addLoader, ILoader);
-                if (screen is IGenericScreen) processState(screen, state, MainController.ME.containsGeneric, MainController.ME.addGeneric, IGeneric);
+                if (screen is IMainContentScreen) processState(screen, state, MainController.ME.containsMainContent, MainController.ME.addMainContent, IMainContent, 0);
+                if (screen is IHudScreen) processState(screen, state, MainController.ME.containsHud, MainController.ME.addHud, IHud, 1);
+                if (screen is ILoaderScreen) processState(screen, state, MainController.ME.containsLoader, MainController.ME.addLoader, ILoader, 2);
+                if (screen is IGenericScreen) processState(screen, state, MainController.ME.containsGeneric, MainController.ME.addGeneric, IGeneric, 3);
             }
             
         }
         
-        private function processState(screen:Screen, currentState:uint, containsFunc:Function, addFunc:Function, itype:Class):void
+        private var stateCounter:Vector.<uint> = null;
+        
+        private function processState(screen:Screen, currentState:uint, containsFunc:Function, addFunc:Function, itype:Class, stateCounterIndex:uint):void
         {
             if (BitFlagUtils.isSet(currentState, screen.flag))
             {
+                
+                if (++stateCounter[stateCounterIndex] > 1)
+                {
+                    if (!(screen is IGenericScreen)) this.statee &= ~screen.flag;
+                    return;
+                }
+                
                 if (screen.controller && containsFunc(screen.controller.getView() as itype)) return;
                 screen.dispose();
                 screen.setController(screen.controllerClass, true);

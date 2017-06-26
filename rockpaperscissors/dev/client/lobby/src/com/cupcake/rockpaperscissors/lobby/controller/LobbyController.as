@@ -1,10 +1,14 @@
 package com.cupcake.rockpaperscissors.lobby.controller
 {
     import com.core.domain.services.controller.ScreenController;
+    import com.core.domain.services.navigation.IScreen;
     import com.core.domain.services.view.IMainContent;
     import com.core.domain.services.view.IView;
     import com.core.utils.Singleton;
+    import com.core.utils.Utils;
     import com.cupcake.rockpaperscissors.lobby.view.LobbyView;
+    import com.cupcake.rockpaperscissors.services.main.GameContext;
+    import com.cupcake.rockpaperscissors.services.navigation.GameScreen;
     
     public class LobbyController extends ScreenController
     {
@@ -37,6 +41,13 @@ package com.cupcake.rockpaperscissors.lobby.controller
         override public function getView():IView
         {
             return view = super.getView() as IMainContent;
+        }
+        
+        public function gotoGame(game:GameScreen):void
+        {
+            Utils.print("LobbyController.gotoGame: " + game, IScreen(game).flag);
+            
+            GameContext.ME.navigator.state |= IScreen(game).flag;
         }
         
     }

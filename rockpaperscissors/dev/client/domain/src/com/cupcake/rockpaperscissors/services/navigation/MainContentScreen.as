@@ -8,9 +8,9 @@ package com.cupcake.rockpaperscissors.services.navigation
         {
             super(id, flag);
         }
-    
-        public function reload():void
-        {
-        }
+        
+//        public function reload():void
+//        {
+//        }
     }
 }

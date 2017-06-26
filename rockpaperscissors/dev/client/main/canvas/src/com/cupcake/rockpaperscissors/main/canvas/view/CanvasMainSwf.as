@@ -12,7 +12,7 @@ package com.cupcake.rockpaperscissors.main.canvas.view
     
     import starling.display.DisplayObject;
     
-    [SWF(width="800", height="600", frameRate="60", backgroundColor="#e1e1e1")]
+    [SWF(width="960", height="640", frameRate="60", backgroundColor="#e1e1e1")]
     public class CanvasMainSwf extends MainSwf
     {
         static internal var ME:CanvasMainSwf;
@@ -64,7 +64,7 @@ package com.cupcake.rockpaperscissors.main.canvas.view
         
         override protected function getViewPortRectangle():Rectangle
         {
-            return new Rectangle(0, 0, 800, 600);
+            return new Rectangle(0, 0, 960, 640);
         }
     }
 }
