@@ -17,22 +17,21 @@ package com.cupcake.rockpaperscissors.main.view
         private var genericContainer:Sprite;
         private var loaderContainer:Sprite;
         
+        private var componentsToDraw:Vector.<Sprite>;
         public function draw():IView
         {
             
             touchable = true;
-            
+           
             gameContainer = addChild(new Sprite()) as Sprite;
-            gameContainer.touchable = true;
-            
             hudContainer = addChild(new Sprite()) as Sprite;
-            hudContainer.touchable = true;
-            
             loaderContainer = addChild(new Sprite()) as Sprite;
-            loaderContainer.touchable = true;
-            
             genericContainer = addChild(new Sprite()) as Sprite;
-            genericContainer.touchable = true;
+
+            componentsToDraw = new Vector.<Sprite>[gameContainer,hudContainer,loaderContainer,genericContainer];
+
+            for(var i:int=0;i<componentsToDraw.length;i++)componentsToDraw[i].touchable = true;
+           
             
             return this;
         }
